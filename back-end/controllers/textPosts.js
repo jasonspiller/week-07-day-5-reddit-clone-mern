@@ -1,31 +1,25 @@
-var models = require('../models');
-var TextPost = models.TextPost;
+var db = require('../models');
+var TextPost = db.TextPost;
 
-function index(req, res) {
+exports.getPosts = function(req, res) {
   TextPost.find({}, function(err, textPosts) {
     if (err) res.send(err);
     else res.json(textPosts);
   });
 }
 
-function create(req, res) {
-  
+exports.postPosts = function(req, res) {
+	console.log('posts');
 }
 
-function show(req, res) {
-
+exports.getPost = function(req, res) {
+	console.log('get');
 }
 
-function update(req, res) {
-
+exports.updatePost = function(req, res) {
+	console.log('update');
 }
 
-function destroy(req, res) {
-
+exports.deletePost = function(req, res) {
+	console.log('delete');
 }
-
-module.exports.index = index;
-module.exports.create = create;
-module.exports.show = show;
-module.exports.update = update;
-module.exports.destroy = destroy;

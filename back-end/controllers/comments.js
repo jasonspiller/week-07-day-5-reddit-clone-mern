@@ -1,18 +1,18 @@
-var models = require('../models');
-var Comment = models.Comment;
+var db = require('../models');
+var Comment = db.Comment;
 
-function create(req, res) {
-  
+exports.postComment = function (req, res) {
+	console.log('post');
 }
 
-function update(req, res) {
-
+exports.getComment = function (req, res) {
+	console.log('get');
 }
 
-function destroy(req, res) {
-
+exports.updateComment = function (req, res) {
+	console.log('update');
 }
 
-module.exports.create = create;
-module.exports.update = update;
-module.exports.destroy = destroy;
+exports.deleteComment = function (req, res) {
+	console.log('delete');
+}

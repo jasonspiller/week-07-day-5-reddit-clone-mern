@@ -1,3 +1,9 @@
+# Questions
+1. `config/routes.js` - Why does the solution use `router.put('/api/comments/:comment_id', commentsController.update);`? Since it's embedded shouldn't we use `router.put('/api/posts/:post_id/comments/:comment_id'), commentController.putComment);`?
+2. `db/seed.js` - Why are we creating populating a comments collection if they are embedded in the textPost documents?
+
+
+
 # Reddit Clone – MERN stack
 Building a [Reddit](https://www.reddit.com/) clone using the popular MERN (Mongo – Express – React – Node) stack.
 
@@ -7,7 +13,7 @@ Building a [Reddit](https://www.reddit.com/) clone using the popular MERN (Mongo
 
 ## PROJECT SETUP
 
-We have the structure of the app all built out for you on the front and back end! It's up to you to fill in the custom code to make it all work! 
+We have the structure of the app all built out for you on the front and back end! It's up to you to fill in the custom code to make it all work!
 
 1. `git clone` this repo
 2. Install all dependencies for both the front-end and back-end
@@ -18,7 +24,7 @@ We have the structure of the app all built out for you on the front and back end
     - BACK-END: What routes, models, and controllers have been set up? What kind of database is it connecting to?
     - FRONT-END: What components have been set up?
 6. run `nodemon server.js`
-        
+
 
 
 ## CREATING THE BACK-END
@@ -43,7 +49,7 @@ We have the structure of the app all built out for you on the front and back end
 5. Use POSTMAN or curl to confirm that the other CRUD routes are working as well (PUT, DELETE)
 
 ### Verifying Data Creation
-1. Use [POSTMAN](https://www.getpostman.com/) or curl to create two `Post`s 
+1. Use [POSTMAN](https://www.getpostman.com/) or curl to create two `Post`s
 2. Use POSTMAN or curl to create two `Comment`s, both attached to the first `Post` you created
 3. Populate the `seed.js` file to automate data seeding
 
@@ -64,10 +70,10 @@ We have the structure of the app all built out for you on the front and back end
 4. Think about the containers you will need
     - What components will each container contain
     - What API requests will each container make
-    - **note:** containers seperate the functionality from the UI. If you need an AJAX call to fetch Comment data, that would happen from a CommentContainer, and be passed to a Comment.js component where it gets displayed. 
+    - **note:** containers seperate the functionality from the UI. If you need an AJAX call to fetch Comment data, that would happen from a CommentContainer, and be passed to a Comment.js component where it gets displayed.
 5. Think about the HTTP request library you'd like to use to fetch data from your Node API endpointments (e.g. `$.ajax`, `fetch`, `axios`, etc.)
 
-    
+
 ### Implementing User Stories
 1. User should see all posts on the home page, ranked in descending order by `votes`
 2. User should be able to click on a "Create Post" button and see a modal to create a new `Post`
@@ -82,7 +88,7 @@ We have the structure of the app all built out for you on the front and back end
 1. Create a `LinkPost` resource
     - Another kind of post a Reddit user can upload (simply links to an external link, e.g. news article or imgur page)
     - Model should contain fields `title`, `link_url`, `thumbnail_image_url`, `votes`
-2. Create a `User` resource 
+2. Create a `User` resource
     - Model should contain fields `first_name`, `last_name`, `email`, and `password_hash`
     - Implement authentication
     - Both `Post` and `Comment` should have `author_id` (views should include author names)

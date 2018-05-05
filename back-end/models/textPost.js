@@ -8,7 +8,7 @@ var TextPostSchema = new Schema({
 	content: String,
 	thumbnail_image_url: String,
 	votes: Number,
-	comment: [CommentModel.schema]
+	comments: [CommentModel.schema]
  });
 
 var TextPost = mongoose.model('TextPost', TextPostSchema);
