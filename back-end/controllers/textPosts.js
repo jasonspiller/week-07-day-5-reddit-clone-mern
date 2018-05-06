@@ -5,8 +5,8 @@ var db = require('../models');
 exports.getPosts = function(req, res) {
 	console.log('gets');
   db.TextPost.find({}, function(err, posts) {
-		if (err) {
-			console.log('Gets Error: ' + err);
+		if(err) {
+			console.log('Gets Posts Error: ' + err);
 			res.sendStatus(500);
 		}
 		res.json(posts);
@@ -18,8 +18,8 @@ exports.getPosts = function(req, res) {
 exports.getPost = function(req, res) {
 	console.log('get');
 	db.TextPost.findById(req.params.post_id, function(err, post) {
-		if (err) {
-			console.log('Get Error: ' + err);
+		if(err) {
+			console.log('Get Post Error: ' + err);
 			res.sendStatus(500);
 		}
 		res.json(post);
@@ -30,16 +30,37 @@ exports.getPost = function(req, res) {
 // create post
 exports.postPosts = function(req, res) {
 	console.log('posts');
+	db.TextPost.create(req.body, function(err, post) {
+		if(err) {
+			console.log('Create Post Error: ' + err);
+			res.sendStatus(500);
+		}
+		res.json(post);
+	});
 }
 
 
 // update post
 exports.updatePost = function(req, res) {
 	console.log('update');
+	TextPost.findByIdAndUpdate(req.params.post_id, {$set: req.body}, function(err, post) {
+		if(err) {
+			console.log('Update Post Error: ' + err);
+			res.sendStatus(500);
+		}
+		res.json(post);
+	});
 }
 
 
 // delete post
 exports.deletePost = function(req, res) {
 	console.log('delete');
+	db.TextPost.findByIdAndRemove(req.params.post_id, function(err, post) {
+		if(err) {
+			console.log('Delete Post Error: ' + err);
+			res.sendStatus(500);
+		}
+		res.send("Post Deleted");
+  });
 }

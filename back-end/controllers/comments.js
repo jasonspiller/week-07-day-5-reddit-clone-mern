@@ -6,8 +6,8 @@ exports.getComments = function (req, res) {
 	console.log('gets');
 	// query the db
 	db.TextPost.findById(req.params.post_id, function (err, post) {
-		if (err) {
-			console.log('DB error: ' + err);
+		if(err) {
+			console.log('Get Comments Error: ' + err);
 			res.sendStatus(500);
 		}
 		res.json(post.comments);
@@ -19,8 +19,8 @@ exports.getComments = function (req, res) {
 exports.getComment = function (req, res) {
 	console.log('get');
 	db.TextPost.findById(req.params.post_id, function (err, post) {
-		if (err) {
-			console.log('Get Error: ' + err);
+		if(err) {
+			console.log('Get Comment Error: ' + err);
 			res.sendStatus(500);
 		}
 
@@ -35,10 +35,10 @@ exports.getComment = function (req, res) {
 
 // create comment
 exports.postComments = function (req, res) {
-	console.log('post');
+	console.log('create');
 	TextPost.findById(req.params.post_id, function(err, post) {
-		if (err) {
-			console.log('Post Error: ' + err);
+		if(err) {
+			console.log('Create Comment Error: ' + err);
 			res.sendStatus(500);
 		}
 
@@ -53,8 +53,8 @@ exports.postComments = function (req, res) {
 exports.updateComment = function (req, res) {
 	console.log('update');
 	db.TextPost.findByIdAndUpdate(req.params.post_id, { $set: {comments: req.body} }, function(err, post) {
-    if (err) {
-			console.log("Update Error: " + err);
+    if(err) {
+			console.log("Update Comment Error: " + err);
 			res.sendStatus(500);
 		}
 		res.json(post);
@@ -67,7 +67,7 @@ exports.deleteComment = function (req, res) {
 	console.log('delete');
 	db.TextPost.findByIdAndUpdate(req.params.post_id, { $pull: {comments: req.params.comment_id} }, function (err, post) {
 		if(err){
-			console.log("Delete Error: " + err);
+			console.log("Delete Comment Error: " + err);
 			res.sendStatus(500);
 		}
 		res.json(post);
