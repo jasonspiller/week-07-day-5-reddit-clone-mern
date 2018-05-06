@@ -1,5 +1,5 @@
 var db = require('../models');
-var Comment = db.Comment;
+
 
 // get all comments from a post
 exports.getComments = function (req, res) {
@@ -14,31 +14,16 @@ exports.getComments = function (req, res) {
 	});
 }
 
-exports.postComments = function (req, res) {
-	console.log('post');
-	Comment.create(req.body, function(err, comment){
-		if (err) res.end(err);
-		else {
-			TextPost.findById(req.params.post_id, function(err, post) {
-				if (err) res.send(err);
-				else {
-					post.comments.push(comment);
-					post.save();
-					res.json(comment);
-				}
-			})
-		}
-	});
-}
 
-// get one comment from post
+// get one comment from a post
 exports.getComment = function (req, res) {
 	console.log('get');
 	db.TextPost.findById(req.params.post_id, function (err, post) {
 		if (err) {
-			console.log('DB error: ' + err);
+			console.log('Get Error: ' + err);
 			res.sendStatus(500);
 		}
+
 		var comment =  post.comments.filter( function(comment) {
 			return comment._id == req.params.comment_id;
 		});
@@ -47,15 +32,44 @@ exports.getComment = function (req, res) {
 	});
 }
 
+
+// create comment
+exports.postComments = function (req, res) {
+	console.log('post');
+	TextPost.findById(req.params.post_id, function(err, post) {
+		if (err) {
+			console.log('Post Error: ' + err);
+			res.sendStatus(500);
+		}
+
+		post.comments.push(comment);
+		post.save();
+		res.json(comment);
+	})
+}
+
+
+// update comment
 exports.updateComment = function (req, res) {
 	console.log('update');
-	Comment.findByIdAndUpdate(req.params.comment_id,
-    {$set: req.body}, function(err, comment){
-    if (err) res.send(err);
-    else res.json(comment);
+	db.TextPost.findByIdAndUpdate(req.params.post_id, { $set: {comments: req.body} }, function(err, post) {
+    if (err) {
+			console.log("Update Error: " + err);
+			res.sendStatus(500);
+		}
+		res.json(post);
   });
 }
 
+
+// delete comment
 exports.deleteComment = function (req, res) {
 	console.log('delete');
+	db.TextPost.findByIdAndUpdate(req.params.post_id, { $pull: {comments: req.params.comment_id} }, function (err, post) {
+		if(err){
+			console.log("Delete Error: " + err);
+			res.sendStatus(500);
+		}
+		res.json(post);
+	})
 }
