@@ -11,7 +11,8 @@ router.put('/api/posts/:post_id', textPostsController.updatePost);
 router.delete('/api/posts/:post_id', textPostsController.deletePost);
 
 //Comment Routes
-router.post('/api/posts/:post_id/comments', commentController.postComment);
+router.get('/api/posts/:post_id/comments', commentController.getComments);
+router.post('/api/posts/:post_id/comments', commentController.postComments);
 router.get('/api/posts/:post_id/comments/:comment_id', commentController.getComment);
 router.put('/api/posts/:post_id/comments/:comment_id', commentController.updateComment);
 router.delete('/api/posts/:post_id/comments/:comment_id', commentController.deleteComment);
