@@ -2,6 +2,8 @@
 1. `config/routes.js` - Why does the solution use `router.put('/api/comments/:comment_id', commentsController.update);`? Since it's embedded shouldn't we use `router.put('/api/posts/:post_id/comments/:comment_id'), commentController.putComment);`?
 2. `db/seed.js` - Why are we creating populating a comments collection if they are embedded in the textPost documents?
 3. `back-end/controllers/textPosts.js` - I used `(req, res, next)` in project 2, it's omitted here. What does `next` do?
+4. `back-end/controllers/textPosts.js` - On update, I had make another data call to get the update post? I thought the callback wouldn't run until the post was done.
+5. `back-end/controllers/comments.js` - All of these seem really inefficient. Any better way to do these?
 
 
 

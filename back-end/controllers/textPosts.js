@@ -29,7 +29,8 @@ exports.getPost = function(req, res) {
 
 // create post
 exports.postPosts = function(req, res) {
-	console.log('posts');
+	console.log('create');
+
 	db.TextPost.create(req.body, function(err, post) {
 		if(err) {
 			console.log('Create Post Error: ' + err);
@@ -43,12 +44,22 @@ exports.postPosts = function(req, res) {
 // update post
 exports.updatePost = function(req, res) {
 	console.log('update');
-	TextPost.findByIdAndUpdate(req.params.post_id, {$set: req.body}, function(err, post) {
+	console.log(req.body);
+
+	db.TextPost.findByIdAndUpdate(req.params.post_id, {$set: req.body}, function(err, post) {
 		if(err) {
 			console.log('Update Post Error: ' + err);
 			res.sendStatus(500);
 		}
-		res.json(post);
+		
+		// get document after updates
+		db.TextPost.findById(req.params.post_id, function(err, post) {
+			if(err) {
+				console.log('Get Post Error: ' + err);
+				res.sendStatus(500);
+			}
+			res.json(post);
+		});
 	});
 }
 

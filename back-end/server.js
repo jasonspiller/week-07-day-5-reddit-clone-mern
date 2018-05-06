@@ -12,7 +12,7 @@ app.use(function(req, res, next) {
 });
 
 var bodyParser = require('body-parser');
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 app.use(redditRouter);
 

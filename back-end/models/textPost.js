@@ -7,7 +7,7 @@ var TextPostSchema = new Schema({
 	title: String,
 	content: String,
 	thumbnail_image_url: String,
-	votes: Number,
+	votes: { type: Number, default: 0 },
 	comments: [CommentModel.schema]
  });
 
